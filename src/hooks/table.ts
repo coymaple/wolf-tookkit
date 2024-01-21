@@ -24,8 +24,8 @@ const defaultPagination = {
 };
 
 interface IUseTableListOptions {
-  query: () => void;
-  processTableData?: (values: any) => { data: any; total: number }; // 自定义数据处理方法
+  query: (params: any) => Promise<any>;
+  processTableData?: () => void; // 自定义数据处理方法
   applyInMount?: boolean; // 是否在页面加载后立即请求列表数据，默认为 true
   initFilters?: { [x: string]: any }; // 筛选默认值
   initPagination?: TPagination; // 分页默认值
@@ -234,9 +234,9 @@ export function useTableList(options: IUseTableListOptions) {
     tableProps: {
       loading,
       total,
-      dataSource,
-      onChange: handleTableChange,
-      pagination,
+      data: dataSource,
+      onChangePage: handleTableChange,
+      pageMeta: pagination,
     },
     requestQueryList,
     handleQueryList,

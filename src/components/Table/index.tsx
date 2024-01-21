@@ -5,6 +5,7 @@ interface ILinkProps {
   text: string;
   onClick: (r?: any, t?: any) => void;
   disabled?: boolean;
+  key?: any;
 }
 const Link = (props: ILinkProps) => {
   const { disabled, onClick, text } = props;
@@ -54,12 +55,12 @@ const renderTableOperates = (operatesFn: (r: any) => TOperateItem[]) => {
     const operates = operatesFn(r);
     return (
       <Space>
-        {operates.map((item, index) => (
-          <OperateItem {...item} key={index} />
+        {operates.map((item) => (
+          <OperateItem {...item} key={item.text} />
         ))}
       </Space>
     );
   };
 };
-export { renderTableOperates };
-// export default renderTableOperates;
+
+export default renderTableOperates;
